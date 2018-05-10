@@ -5,16 +5,20 @@ namespace Template {
 
 class Game
 {
-	// member variables
-	public Surface screen;
+
+    Camera camera = new Camera();
+    // member variables
+    public Surface screen;
 	// initialize
 	public void Init()
 	{
-	}
+            
+    }
 	// tick: renders one frame
 	public void Tick()
 	{
-		
+            
+            camera.GeneratePrimaryRays(screen.width, screen.height);
 	}
 }
 

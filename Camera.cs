@@ -28,12 +28,12 @@ namespace Template
  
         }
 
-        public void GeneratePrimaryRays()
+        public void GeneratePrimaryRays(int width, int height)
         {
-            Game game = new Game();
+            //Game game = new Game();
 
-            for (int i = 0; i < game.screen.width; ++i)
-                for (int j = 0; j < game.screen.height; ++j)
+            for (int i = 0; i < width; ++i)
+                for (int j = 0; j < height; ++j)
                 {                    
                     rayDir = new Vector3(i, j, 1) - cameraPos;
                     // z = 1 for now, just like the camera. 
