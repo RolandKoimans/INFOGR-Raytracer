@@ -9,8 +9,12 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Template
 {
-    class Primitive
+    class Ray
     {
+        // Ray class, containing the origin vector, the direction vector and distance t
+        Vector3 Origin;
+        Vector3 Direction;
+        float t;
 
     }
 }
