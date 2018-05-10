@@ -9,7 +9,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Template
 {
-    class Camera
+    class Camera : Raytracer
     {
         Vector3 cameraPos = new Vector3(0, 0, 0);
         Vector3 viewDirection = new Vector3(0, 0, 1);
@@ -28,9 +28,10 @@ namespace Template
  
         }
 
-        public void PrimaryRays()
+        public void GeneratePrimaryRays()
         {
             Game game = new Game();
+
             for (int i = 0; i < game.screen.width; ++i)
                 for (int j = 0; j < game.screen.height; ++j)
                 {                    
@@ -43,8 +44,15 @@ namespace Template
                     // all rays start at the cameraposition. 
                     // the direction (rayDir) depends on the values of i and j. i is the x value in the plane, j the y value. 
                     // the direction is then normalized and a new ray is created with camerPos and rayDir. 
-                }
-        }
 
+                    if (i%10 == 0 && j == 0)
+                    {
+                        debug.Line((int)cameraPos.X, 0, i, j, 0xffffff);
+                    }
+                    // this is supposed to be in the Raytracer class. Here for the time being. 
+                    // should also be a different screen (same one as the ones containing the scene right now)
+                    // coordinates of line also not correct yet. 
+                }
+        }        
     }
 }

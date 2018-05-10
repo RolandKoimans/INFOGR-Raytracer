@@ -9,7 +9,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Template
 {
-    class Scene
+    class Scene : Raytracer
     {
 
     }

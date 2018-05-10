@@ -11,6 +11,6 @@ namespace Template
 {
     class Raytracer
     {
-
+        public Surface debug;
     }
 }
