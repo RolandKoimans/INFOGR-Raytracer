@@ -20,7 +20,8 @@ namespace Template
         {
             theta = 0;
             phi = 0;
-            spherePos = new Vector3(12, 1, 4); // temporary values
+            radius = 3;
+            spherePos = new Vector3(12, 1, 4); // temporary values, will have to become parameters
         }
 
         public void DrawSphere()
