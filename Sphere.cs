@@ -11,6 +11,12 @@ namespace Template
 {
     class Sphere : Primitive
     {
+        Vector3 speherePos;
+        int radius;
 
+        public Sphere()
+        {
+            
+        }
     }
 }
