@@ -18,6 +18,7 @@ namespace Template
 
         public Ray(Vector3 origin, Vector3 direction)
         {
+            t = 1;
             Origin = origin;
             Direction = direction;
             Vector3 P = Origin + t * Direction;

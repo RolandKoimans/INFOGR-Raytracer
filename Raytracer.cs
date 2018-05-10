@@ -12,5 +12,11 @@ namespace Template
     class Raytracer
     {
         public Surface debug;
+        
+        public Raytracer()
+        {
+            debug = new Surface(512, 512);
+            
+        }
     }
 }

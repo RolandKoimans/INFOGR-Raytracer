@@ -43,7 +43,7 @@ namespace Template
                     Ray ray = new Ray(cameraPos, rayDir);
                     // all rays start at the cameraposition. 
                     // the direction (rayDir) depends on the values of i and j. i is the x value in the plane, j the y value. 
-                    // the direction is then normalized and a new ray is created with camerPos and rayDir. 
+                    // the direction is then normalized with 'normalizer' (1/magnitude) and a new ray is created with camerPos and rayDir. 
 
                     if (i%10 == 0 && j == 0)
                     {
