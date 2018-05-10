@@ -11,6 +11,15 @@ namespace Template
 {
     class Scene : Raytracer
     {
+        List<Primitive> primitives;
+        List<Light> lightsources;
 
+
+        // public Vector3 Intersect()
+        // {
+        // for each ( primitive in primitives)
+        // primitive.intersectMethodFromPrimitiveClass();
+        // return closest intersection;  <-- probably a Vector3 value. 
+        // }
     }
 }

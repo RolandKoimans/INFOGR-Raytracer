@@ -11,6 +11,6 @@ namespace Template
 {
     class Primitive
     {
-        Color4 color;
+        Vector3 color;
     }
 }
