@@ -20,14 +20,7 @@ namespace Template
             theta = 0;
             phi = 0;                   
 
-            Sphere sphere1 = new Sphere();
-            sphere1.DrawSphere(3, 2, 4, 17);
 
-            Sphere sphere2 = new Sphere();
-            sphere2.DrawSphere(10, 10, 2, 5);
-
-            Sphere sphere3 = new Sphere();
-            sphere3.DrawSphere(5, 2, 20, 17);
         }
 
         public void DrawSphere(int radius, float posx, float posy, float posz)
