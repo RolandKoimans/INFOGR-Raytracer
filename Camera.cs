@@ -12,7 +12,7 @@ namespace Template
     class Camera : Raytracer
     {
         Vector3 cameraPos = new Vector3(0, 0, 0);
-        Vector3 viewDirection = new Vector3(0, 0, 1);
+        Vector3 viewDirection = new Vector3(0, 0, -1);
 
         float FOV = 1;
         Vector3 p1, p2, p3, rayDir;
@@ -30,7 +30,7 @@ namespace Template
 
         public void GeneratePrimaryRays(int width, int height)
         {
-            //Game game = new Game();
+            
 
             for (int i = 0; i < width; ++i)
                 for (int j = 0; j < height; ++j)
