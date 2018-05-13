@@ -37,5 +37,17 @@ namespace Template
                 // the loop calculates the coordinates for all points on the sphere, while increasing angles theta and phi. 
             }
         }
+
+        public override void Intersect(Ray ray)
+        {
+            Vector3 c = this.spherePos - ray.Origin;
+            float t = Dot(c, ray.Direction);
+            Vector3 q = c - t * ray.Direction;
+            float psqrt = Dot(q, q);
+            //if (psqrt > (radius * radius) ) return;
+            //t -= Math.Sqrt((radius * radius) – psqrt);
+            if ((t < ray.t) && (t > 0)) ray.t = t;
+            // or: ray.t = min( ray.t, max( 0, t ) );
+        }
     }
 }

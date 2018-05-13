@@ -16,11 +16,11 @@ namespace Template
     
         public Plane()
         {            
+                     
+        }
 
-
-            //5 planes needed
-
-           
+        public override void Intersect(Ray ray)
+        {
         }
     }
 }
