@@ -14,29 +14,36 @@ namespace Template
         Vector3 spherePos;
         double x, y, z;        
         int theta, phi;
+        int rad;
+        float posX, posY, posZ;
 
-        public Sphere()
+        public Sphere(int radius, float posx, float posy, float posz)
         {
             theta = 0;
-            phi = 0;            
+            phi = 0;
+            rad = radius;
+            posX = posx;
+            posY = posy;
+            posZ = posz;
+           
         }
 
-        public void DrawSphere(int radius, float posx, float posy, float posz)
-        {
-            spherePos = new Vector3(posx, posy, posz);
-            // gives the center of the sphere.         
+        //public void DrawSphere(int radius, float posx, float posy, float posz)
+        //{
+        //    spherePos = new Vector3(posx, posy, posz);
+        //    // gives the center of the sphere.         
 
-            while (theta < 2*Math.PI && phi < 2*Math.PI)               
-            {
-                theta++; phi++;
-                x = spherePos.X + radius * (Math.Sin(theta) * Math.Cos(phi));
-                y = spherePos.Y + radius * (Math.Sin(theta) * Math.Sin(phi));
-                z = spherePos.Z + radius * (Math.Cos(theta));
+        //    while (theta < 2*Math.PI && phi < 2*Math.PI)               
+        //    {
+        //        theta++; phi++;
+        //        x = spherePos.X + radius * (Math.Sin(theta) * Math.Cos(phi));
+        //        y = spherePos.Y + radius * (Math.Sin(theta) * Math.Sin(phi));
+        //        z = spherePos.Z + radius * (Math.Cos(theta));
 
-                // parametric equation for a sphere, taking the sphere's radius and coordinates of the center as parameters. 
-                // the loop calculates the coordinates for all points on the sphere, while increasing angles theta and phi. 
-            }
-        }
+        //        // parametric equation for a sphere, taking the sphere's radius and coordinates of the center as parameters. 
+        //        // the loop calculates the coordinates for all points on the sphere, while increasing angles theta and phi. 
+        //    }
+        //}
 
         public override void Intersect(Ray ray)
         {
