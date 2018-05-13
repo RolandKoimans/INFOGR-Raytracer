@@ -16,29 +16,41 @@ namespace Template
 
         public Scene()
         {
+            List<Primitive> primitives = new List<Primitive>();
+
+            // should be 10x10x10 cube. 
             Sphere sphere1 = new Sphere();
-            sphere1.DrawSphere(3, 2, 4, 17);
+            sphere1.DrawSphere(3, 2, 0, 7);
+            primitives.Add(sphere1);
 
             Sphere sphere2 = new Sphere();
-            sphere2.DrawSphere(10, 10, 2, 5);
+            sphere2.DrawSphere(2, 7, 0, 5);
+            primitives.Add(sphere2);
 
             Sphere sphere3 = new Sphere();
-            sphere3.DrawSphere(5, 2, 20, 17);
+            sphere3.DrawSphere(1, 2, 0, 2); // y=0, because center should be at y=0. 
+            primitives.Add(sphere3);
 
-            Plane left = new Plane();
-            left.normal = new Vector3(1, 0, 0);
+            //Plane left = new Plane();
+            //left.normal = new Vector3(1, 0, 0);
+            //primitives.Add(left);
 
-            Plane top = new Plane();
-            top.normal = new Vector3(0, 1, 0);
+            //Plane top = new Plane();
+            //top.normal = new Vector3(0, 1, 0);
+            //primitives.Add(top);
 
-            Plane back = new Plane();
-            back.normal = new Vector3(0, 0, -1);
+            //Plane back = new Plane();
+            //back.normal = new Vector3(0, 0, -1);
+            //primitives.Add(back);
 
-            Plane right = new Plane();
-            right.normal = new Vector3(-1, 0, 0);
+            //Plane right = new Plane();
+            //right.normal = new Vector3(-1, 0, 0);
+            //primitives.Add(right);
 
             Plane bottom = new Plane();
             bottom.normal = new Vector3(0, -1, 0); // should become the checkered board. 
+            bottom.distance = 5;
+            primitives.Add(bottom);
 
         }
 

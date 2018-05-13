@@ -12,7 +12,7 @@ namespace Template
     class Plane : Primitive
     {
         public Vector3 normal;
-        float distance; // or vector3?
+        public float distance; // or vector3?
     
         public Plane()
         {            

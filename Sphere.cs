@@ -18,9 +18,7 @@ namespace Template
         public Sphere()
         {
             theta = 0;
-            phi = 0;                   
-
-
+            phi = 0;            
         }
 
         public void DrawSphere(int radius, float posx, float posy, float posz)

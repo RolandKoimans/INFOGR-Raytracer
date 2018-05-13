@@ -12,5 +12,13 @@ namespace Template
     class Primitive
     {
         Vector3 color;
+
+        public Primitive()
+        { }
+
+        //public Vector3 Intersect()
+        //{
+
+        //}
     }
 }

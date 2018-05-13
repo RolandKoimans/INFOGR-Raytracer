@@ -12,7 +12,7 @@ class Game
 	// initialize
 	public void Init()
 	{
-            
+            Scene scene = new Scene();       
     }
 	// tick: renders one frame
 	public void Tick()
