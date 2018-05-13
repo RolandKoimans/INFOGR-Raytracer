@@ -14,7 +14,7 @@ namespace Template
         // Ray class, containing the origin vector, the direction vector and distance t
         public Vector3 Origin;
         public Vector3 Direction;
-        Vector3 P;
+        public Vector3 R;
         public float t;
 
         public Ray(Vector3 origin, Vector3 direction)
@@ -22,7 +22,7 @@ namespace Template
             t = 1;
             Origin = origin;
             Direction = direction;
-            P = Origin + t * Direction;
+            R = Origin + t * Direction;
             
         }
 

@@ -47,9 +47,8 @@ namespace Template
             //right.normal = new Vector3(-1, 0, 0);
             //primitives.Add(right);
 
-            Plane bottom = new Plane();
-            bottom.normal = new Vector3(0, -1, 0); // should become the checkered board. 
-            bottom.distance = 5;
+            Plane bottom = new Plane(new Vector3(0, -1, 0), new Vector3(0, -1, 0), 10);
+            //bottom.distance = 5;
             primitives.Add(bottom);
 
         }
