@@ -9,7 +9,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Template
 {
-    class Scene : Raytracer
+    class Scene //: Raytracer
     {
         public List<Primitive> primitives = new List<Primitive>();
         //public List<Light> lightsources;

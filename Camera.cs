@@ -9,7 +9,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Template
 {
-    class Camera : Raytracer
+    class Camera //: Raytracer
     {
         public Vector3 cameraPos = new Vector3(0, 0, 0); // HERE
         Vector3 viewDirection = new Vector3(0, 0, -1);
