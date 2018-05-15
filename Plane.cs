@@ -24,6 +24,21 @@ namespace Template
         
         public override void Intersect(Ray ray)
         {
+            Vector3 E = ray.Origin;
+            Vector3 D = ray.Direction;
+
+            float ND = Dot(normal, D);
+
+            if (ND == 0) return;
+
+            float t = Dot(normal, (P - E)) / ND;
+
+            if (t < 0) return;
+
+            ray.t = t;
+
+
+
             ray.t = (Dot(normal, (point - ray.Origin)) / Dot(normal, ray.Direction));   // <--- website
             //ray.t = -(Dot(ray.Origin, normal) + distance) / Dot(normal, ray.Direction); // length ray   <---- slides
             point = ray.Origin + ray.t * ray.Direction;
