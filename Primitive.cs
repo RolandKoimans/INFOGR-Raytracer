@@ -11,7 +11,7 @@ namespace Template
 {
     class Primitive
     {
-        Vector3 color;
+        //Vector3 color;
 
         public Primitive()
         { }

@@ -12,19 +12,20 @@ namespace Template
     class Sphere : Primitive
     {
         Vector3 spherePos;
-        double x, y, z;        
-        int theta, phi;
+        //double x, y, z;        
+        //int theta, phi;
         int rad;
         float posX, posY, posZ;
 
         public Sphere(int radius, float posx, float posy, float posz)
         {
-            theta = 0;
-            phi = 0;
+            //theta = 0;
+            //phi = 0;
             rad = radius;
             posX = posx;
             posY = posy;
             posZ = posz;
+            spherePos = new Vector3(posX, posY, posZ);
            
         }
 

@@ -6,20 +6,20 @@ namespace Template {
 class Game
 {
 
-    Camera camera = new Camera();
+        Raytracer tracer = new Raytracer();
     // member variables
     public Surface screen;
 	// initialize
 	public void Init()
 	{
-            Scene scene = new Scene();       
+            tracer.Render(512,512);   
     }
-	// tick: renders one frame
+	
 	public void Tick()
 	{
             
-            camera.GeneratePrimaryRays(screen.width, screen.height);
-	}
+
+    }
 }
 
 } // namespace Template

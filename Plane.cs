@@ -11,17 +11,18 @@ namespace Template
 {
     class Plane : Primitive
     {
-        public Vector3 normal, point, distance, P;
+        public Vector3 normal, P;
+        //public float distance;
         public int size;     
     
-        public Plane(Vector3 norm, Vector3 dist, int sz)
+        public Plane(Vector3 norm, int sz)
         {
             normal = norm;            
-            distance = dist;
+            //distance = dist;
             size = sz;
-            P = size * normal + distance;
+            P = size * normal;
         }
-        
+
         public override void Intersect(Ray ray)
         {
             Vector3 E = ray.Origin;
@@ -33,21 +34,9 @@ namespace Template
 
             float t = Dot(normal, (P - E)) / ND;
 
-            if (t < 0) return;
+            if (t < 0 || ND == 0) return;
 
             ray.t = t;
-
-
-
-            ray.t = (Dot(normal, (point - ray.Origin)) / Dot(normal, ray.Direction));   // <--- website
-            //ray.t = -(Dot(ray.Origin, normal) + distance) / Dot(normal, ray.Direction); // length ray   <---- slides
-            point = ray.Origin + ray.t * ray.Direction;
-            
-            
-
-            if (ray.t < 0 || Dot(normal, ray.Direction) == 0) return; // no intersection
-            //ray.t >= 0 intersection point = origin + ray.t*distance
-            
         }
     }
 }
