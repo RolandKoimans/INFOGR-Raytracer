@@ -23,12 +23,12 @@ namespace Template
 
         }
 
-        public void Render(int width, int height)
+        public int Render(int width, int height)
         {
-            for (int i = 0; i < width; i++)
-                for (int j = 0; j < height; j++)
-                {
-                    rayDir = new Vector3(i, j, 1) - camera.cameraPos;
+            
+               
+                
+                    rayDir = new Vector3(width, height, 1) - camera.cameraPos;
                     // z = 1 for now, just like the camera. 
                     float normalizer = (float)(1 / Math.Sqrt(rayDir.X * rayDir.X + rayDir.Y * rayDir.Y + rayDir.Z * rayDir.Z));
                     rayDir = new Vector3(rayDir.X * normalizer + rayDir.Y * normalizer + rayDir.Z * normalizer);
@@ -37,10 +37,11 @@ namespace Template
                     // all rays start at the cameraposition. 
                     // the direction (rayDir) depends on the values of i and j. i is the x value in the plane, j the y value. 
                     // the direction is then normalized with 'normalizer' (1/magnitude) and a new ray is created with camerPos and rayDir. 
-                    int location = i + j * 512;
+                    
                     scene.IntersectAll(ray);
+                    return (int)ray.t;
                     //Console.WriteLine("location: " + location + " Ray t: " + ray.t);
-                    screen.pixels[location] = (int)ray.t + 100;
+                    
 
                     //if (i % 10 == 0 && j == 0)
                     //{
@@ -49,7 +50,7 @@ namespace Template
                     
                     // should be a different screen (same one as the ones containing the scene right now)
                     // coordinates of line also not correct yet. 
-                }
+                
         }
 
         public void DrawPrimsDebug()
