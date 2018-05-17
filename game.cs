@@ -1,5 +1,9 @@
 ﻿using System;
 using System.IO;
+using OpenTK;
+using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
 
 namespace Template {
 
@@ -42,6 +46,7 @@ class Game
 
             //Seperation line
             screen.Line(512, 0, 512, 512, 0xff0000);
+            tracer.DrawPrimsDebug();
 
         }
     }
