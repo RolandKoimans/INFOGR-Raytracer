@@ -20,13 +20,13 @@ namespace Template
         {
             debug = new Surface(512, 512);
             screen = new Surface(512, 512);
-            
+
         }
 
         public void Render(int width, int height)
         {
-            for (int i = 0; i < width; ++i)
-                for (int j = 0; j < height; ++j)
+            for (int i = 0; i < width; i++)
+                for (int j = 0; j < height; j++)
                 {
                     rayDir = new Vector3(i, j, 1) - camera.cameraPos;
                     // z = 1 for now, just like the camera. 
@@ -37,9 +37,10 @@ namespace Template
                     // all rays start at the cameraposition. 
                     // the direction (rayDir) depends on the values of i and j. i is the x value in the plane, j the y value. 
                     // the direction is then normalized with 'normalizer' (1/magnitude) and a new ray is created with camerPos and rayDir. 
-                    int location = i + j * screen.width;
+                    int location = i + j * 512;
                     scene.IntersectAll(ray);
-                    screen.pixels[location] = (int)ray.t;
+                    //Console.WriteLine("location: " + location + " Ray t: " + ray.t);
+                    screen.pixels[location] = (int)ray.t + 100;
 
                     //if (i % 10 == 0 && j == 0)
                     //{

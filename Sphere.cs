@@ -14,7 +14,7 @@ namespace Template
         Vector3 spherePos;
         //double x, y, z;        
         //int theta, phi;
-        int rad;
+        public int rad;
         float posX, posY, posZ;
 
         public Sphere(int radius, float posx, float posy, float posz)
