@@ -7,17 +7,17 @@ using OpenTK.Input;
 
 namespace Template {
 
-class Game
-{
+    class Game
+    {
 
         Raytracer tracer = new Raytracer();
         Camera camera = new Camera();
         Scene scene = new Scene();
-    // member variables
-    public Surface screen;
-	// initialize
-	public void Init()
-	{
+        // member variables
+        public Surface screen;
+        // initialize
+        public void Init()
+        {
             //tracer.Render(512,512);
             for (int i = 0; i < 512; i++)
             {
@@ -59,20 +59,9 @@ class Game
             //Draws a seperation line.
             screen.Line(512, 0, 512, 512, 0xff0000);
         }
-	
-	public void Tick()
-	{
 
-
-            //Seperation line
-            //screen.Line(512, 0, 512, 512, 0xff0000);
-            //tracer.DrawPrimsDebug();
-
-
-
-
-
-
+        public void Tick()
+        {
 
         }
     }

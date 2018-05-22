@@ -13,11 +13,11 @@ namespace Template
     {
         public List<Primitive> primitives = new List<Primitive>();
         public List<Primitive> sphereList = new List<Primitive>();
-        //public List<Light> lightsources;
+        
 
         public Scene()
         {
-            //primitives = new List<Primitive>();
+            
 
             // should be 10x10x10 cube. 
             Sphere sphere1 = new Sphere(3, 10, 10, 7);
