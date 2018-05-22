@@ -11,6 +11,8 @@ class Game
 {
 
         Raytracer tracer = new Raytracer();
+        Camera camera = new Camera();
+        Scene scene = new Scene();
     // member variables
     public Surface screen;
 	// initialize
@@ -37,17 +39,24 @@ class Game
                     screen.pixels[location] = 0;
                 }
             }
-            for (int theta = 0; theta < 360; theta++  )
-            {
-            
-                double xcord = 100 * Math.Cos(theta) + 100;
-                double ycord = 100 * Math.Sin(theta) + 100;
-                //Console.WriteLine("x " + xcord + " y " + ycord);
-                //int location = 100 + 100 * 1024;
-                screen.Plot((int)xcord, (int)ycord, 0xff0000);
-                //screen.pixels[location] = 256 * 256 + 1000;
 
+            //Draws every sphere, including its own offset and a bonus offset, so that the spheres don't cling to the edges.
+            //Color offset is a cheap solution to give the spheres a different color each time.
+            int coloroffset = 0x00ff00;
+            foreach (Sphere sphere in scene.sphereList)
+            {
+                coloroffset *= 256 + 100;
+                for (int theta = 0; theta < 360; theta++)
+                {
+                    double xcord = sphere.rad * 10 * Math.Cos(theta);
+                    double ycord = sphere.rad * 10 * Math.Sin(theta);
+                    int offsetX = (int)sphere.spherePos.X;
+                    int offsetY = (int)sphere.spherePos.Y;
+                    screen.Plot((int)xcord + offsetX + 750, (int)ycord + offsetY + 256, coloroffset);
+                }
             }
+
+            //Draws a seperation line.
             screen.Line(512, 0, 512, 512, 0xff0000);
         }
 	
