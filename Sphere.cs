@@ -29,24 +29,8 @@ namespace Template
            
         }
 
-        //public void DrawSphere(int radius, float posx, float posy, float posz)
-        //{
-        //    spherePos = new Vector3(posx, posy, posz);
-        //    // gives the center of the sphere.         
 
-        //    while (theta < 2*Math.PI && phi < 2*Math.PI)               
-        //    {
-        //        theta++; phi++;
-        //        x = spherePos.X + radius * (Math.Sin(theta) * Math.Cos(phi));
-        //        y = spherePos.Y + radius * (Math.Sin(theta) * Math.Sin(phi));
-        //        z = spherePos.Z + radius * (Math.Cos(theta));
-
-        //        // parametric equation for a sphere, taking the sphere's radius and coordinates of the center as parameters. 
-        //        // the loop calculates the coordinates for all points on the sphere, while increasing angles theta and phi. 
-        //    }
-        //}
-
-        public override void Intersect(Ray ray)
+        public override Intersection Intersect(Ray ray)
         {
             Vector3 c = this.spherePos - ray.Origin; //vector from vector origin to center of sphere           
                 
@@ -59,11 +43,21 @@ namespace Template
             //{
             //    Console.WriteLine("p2 is " + p2.ToString());
             //}
-            if (p2 > (rad * rad)) return;
-
+            
+            if (p2 > (rad * rad)) return null;
+            
             t -= (float)Math.Sqrt(rad * rad - p2);
-            if ((t < ray.t) && (t > 0)) ray.t = t;
 
+            if (/*(t < ray.t) &&*/ (t > 0))
+            {
+                //subject to change
+                Vector3 normal = new Vector3(0,0,0);
+                
+
+                return new Intersection(t, ray, normal, this);
+            }
+
+            return null;
             //Console.WriteLine("this is t " + t.ToString());
             // or: ray.t = min( ray.t, max( 0, t ) );
         }

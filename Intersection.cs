@@ -11,5 +11,17 @@ namespace Template
 {
     class Intersection
     {
+        public float distance;
+        public Ray ray;
+        public Vector3 normal;
+        public Primitive currentobject;
+
+        public Intersection(float distance, Ray ray, Vector3 normal, Primitive currentobject)
+        {
+            this.distance = distance;
+            this.ray = ray;
+            this.normal = normal;
+            this.currentobject = currentobject;
+        }
     }
 }

@@ -9,16 +9,17 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Template
 {
+
     class Primitive
     {
-        //Vector3 color;
+        public Material material;
 
         public Primitive()
         { }
 
-        public virtual void Intersect(Ray ray)
+        public virtual Intersection Intersect(Ray ray)
         {
-
+            return null;
         }
 
         public float Dot(Vector3 a, Vector3 b)

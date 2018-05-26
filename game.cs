@@ -5,7 +5,8 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
-namespace Template {
+namespace Template
+{
 
     class Game
     {
@@ -18,13 +19,33 @@ namespace Template {
         // initialize
         public void Init()
         {
+
+        }
+
+        public void Tick()
+        {
             //tracer.Render(512,512);
             for (int i = 0; i < 512; i++)
             {
                 for (int j = 0; j < 512; j++)
                 {
                     int location = j + i * 1024;
-                    screen.pixels[location] = tracer.Render(i, j);
+                    float u = j / 512f;
+                    float v = i / 512f;
+
+                    Vector3 floatcolor = tracer.Render(u, v);
+
+                    float clampx = Math.Min(floatcolor.X, 1);
+                    float clampy = Math.Min(floatcolor.Y, 1);
+                    float clampz = Math.Min(floatcolor.Z, 1);
+
+                    int redcomponent = (int)(255 * floatcolor.X);
+                    int greencomponent = (int)(255 * floatcolor.Y);
+                    int bluecomponent = (int)(255 * floatcolor.Z);
+
+                    int intcolor = (redcomponent << 16) + (greencomponent << 8) + bluecomponent;
+
+                    screen.pixels[location] = intcolor;
 
 
                 }
@@ -58,11 +79,6 @@ namespace Template {
 
             //Draws a seperation line.
             screen.Line(512, 0, 512, 512, 0xff0000);
-        }
-
-        public void Tick()
-        {
-
         }
     }
 

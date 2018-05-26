@@ -13,38 +13,35 @@ namespace Template
     {
         public List<Primitive> primitives = new List<Primitive>();
         public List<Primitive> sphereList = new List<Primitive>();
-        
+
 
         public Scene()
         {
-            
 
-            // should be 10x10x10 cube. 
-            Sphere sphere1 = new Sphere(3, 10, 10, 7);
-            //sphere1.DrawSphere(3, 2, 0, 7);
+
+       
+            Sphere sphere1 = new Sphere(4, -5, 0, 20)
+            {
+                material = new Material(new Vector3(1, 0, 0))
+
+            };
             primitives.Add(sphere1);
             sphereList.Add(sphere1);
 
-            Sphere sphere2 = new Sphere(4, 120, 50, 7);
-            //sphere1.DrawSphere(3, 2, 0, 7);
+            Sphere sphere2 = new Sphere(5, 0, 0, 30)
+            {
+                material = new Material(new Vector3(0, 1, 0))
+            };
             primitives.Add(sphere2);
             sphereList.Add(sphere2);
 
-            //Plane left = new Plane();
-            //left.normal = new Vector3(1, 0, 0);
-            //primitives.Add(left);
+            Sphere sphere3 = new Sphere(6, 5, 0, 35)
+            {
+                material = new Material(new Vector3(0, 0, 1))
+            };
+            primitives.Add(sphere3);
+            sphereList.Add(sphere3);
 
-            //Plane top = new Plane();
-            //top.normal = new Vector3(0, 1, 0);
-            //primitives.Add(top);
-
-            //Plane back = new Plane();
-            //back.normal = new Vector3(0, 0, -1);
-            //primitives.Add(back);
-
-            //Plane right = new Plane();
-            //right.normal = new Vector3(-1, 0, 0);
-            //primitives.Add(right);
 
             Plane bottom = new Plane(new Vector3(0, -1, 0), 10);
             //bottom.distance = 5;
@@ -59,8 +56,8 @@ namespace Template
             float currenT;
             foreach (Primitive primitive in primitives)
             {
-                primitive.Intersect(ray);
-                currenT = ray.t;
+                Intersection intersect = primitive.Intersect(ray);
+                currenT = intersect.distance;
                 if (currenT < shortesT)
                 {
                     shortesT = currenT;
@@ -68,7 +65,7 @@ namespace Template
             }
             cloInt = ray.Origin + shortesT * ray.Direction;
 
-            return cloInt;            
+            return cloInt;
         }
     }
 }

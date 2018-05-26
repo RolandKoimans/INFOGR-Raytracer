@@ -23,20 +23,21 @@ namespace Template
             P = size * normal;
         }
 
-        public override void Intersect(Ray ray)
+        public override Intersection Intersect(Ray ray)
         {
             Vector3 E = ray.Origin;
             Vector3 D = ray.Direction;
 
             float ND = Dot(normal, D);
 
-            if (ND == 0) return;
+            if (ND == 0) return null;
 
             float t = Dot(normal, (P - E)) / ND;
 
-            if (t < 0 || ND == 0) return;
+            if (t < 0 || ND == 0) return null;
 
-            ray.t = t;
+            //Sray.t = t;
+            return null;
         }
     }
 }
