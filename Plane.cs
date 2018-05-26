@@ -11,33 +11,30 @@ namespace Template
 {
     class Plane : Primitive
     {
-        public Vector3 normal, P;
+        public Vector3 normal, offsetpoint;
         //public float distance;
-        public int size;     
-    
-        public Plane(Vector3 norm, int sz)
+
+        public Plane(Vector3 norm, Vector3 point)
         {
-            normal = norm;            
-            //distance = dist;
-            size = sz;
-            P = size * normal;
+            normal = norm;
+            offsetpoint = point;
+            
         }
 
         public override Intersection Intersect(Ray ray)
         {
-            Vector3 E = ray.Origin;
-            Vector3 D = ray.Direction;
 
-            float ND = Dot(normal, D);
+            float d = Vector3.Dot(normal, offsetpoint) * -1;
 
-            if (ND == 0) return null;
+            // t formula from slides
+            float t = -((Vector3.Dot(ray.Origin, normal) + d) / Vector3.Dot(ray.Direction, normal));
 
-            float t = Dot(normal, (P - E)) / ND;
+            //checks if parallel or t behind camera
+            if (t < 0 || float.IsInfinity(t)) return null;
 
-            if (t < 0 || ND == 0) return null;
+            return new Intersection(t, ray, normal, this);
 
-            //Sray.t = t;
-            return null;
+
         }
     }
 }

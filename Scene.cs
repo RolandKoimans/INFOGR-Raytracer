@@ -9,7 +9,7 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Template
 {
-    class Scene //: Raytracer
+    class Scene 
     {
         public List<Primitive> primitives = new List<Primitive>();
         public List<Primitive> sphereList = new List<Primitive>();
@@ -30,7 +30,7 @@ namespace Template
 
             Sphere sphere2 = new Sphere(5, 0, 0, 30)
             {
-                material = new Material(new Vector3(0, 1, 0))
+                material = new Material(new Vector3(1, 0, 1))
             };
             primitives.Add(sphere2);
             sphereList.Add(sphere2);
@@ -43,9 +43,11 @@ namespace Template
             sphereList.Add(sphere3);
 
 
-            Plane bottom = new Plane(new Vector3(0, -1, 0), 10);
-            //bottom.distance = 5;
-            primitives.Add(bottom);
+            Plane plane1 = new Plane(new Vector3(0, 1, 0), new Vector3(0,5,0))
+            {
+                material = new Material(new Vector3(0.5f,0.9f,0.2f))
+            };
+            primitives.Add(plane1);
 
         }
 

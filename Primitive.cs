@@ -15,7 +15,9 @@ namespace Template
         public Material material;
 
         public Primitive()
-        { }
+        {
+            material = new Material(new Vector3(1, 1, 1));
+        }
 
         public virtual Intersection Intersect(Ray ray)
         {

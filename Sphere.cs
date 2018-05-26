@@ -50,7 +50,7 @@ namespace Template
 
             if (/*(t < ray.t) &&*/ (t > 0))
             {
-                //subject to change
+                //subject to change for lights
                 Vector3 normal = new Vector3(0,0,0);
                 
 

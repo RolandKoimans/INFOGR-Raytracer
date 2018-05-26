@@ -22,7 +22,6 @@ namespace Template
         public Camera()
         {
             screenCenter = cameraPos + FOV * viewDirection;
-
             p1 = screenCenter + new Vector3(-1, -1, 0); // bottom left
             p2 = screenCenter + new Vector3(1, -1, 0); // bottom right
             p3 = screenCenter + new Vector3(-1, 1, 0); // top left
