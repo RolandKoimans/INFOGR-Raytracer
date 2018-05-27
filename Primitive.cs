@@ -22,12 +22,7 @@ namespace Template
         public virtual Intersection Intersect(Ray ray)
         {
             return null;
-        }
-
-        public float Dot(Vector3 a, Vector3 b)
-        {
-            return a.X * b.X + a.Y * b.Y + a.Z * b.Z;
-        }
+        }        
         // calculates dot product of two vectors. 
     }
 }
