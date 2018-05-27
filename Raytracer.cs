@@ -12,8 +12,9 @@ namespace Template
     class Raytracer
     {
         public Vector3 rayDir;
-        Camera camera = new Camera();
+        public Camera camera = new Camera();
         Scene scene = new Scene();
+
         public Vector2 circleEq;
 
 

@@ -12,7 +12,8 @@ namespace Template
     {
 
         Raytracer tracer = new Raytracer();
-        Camera camera = new Camera();
+        Application app = new Application();
+        //Camera camera = new Camera();
         Scene scene = new Scene();
         // member variables
         public Surface screen;
@@ -79,6 +80,8 @@ namespace Template
 
             //Draws a seperation line.
             screen.Line(512, 0, 512, 512, 0xff0000);
+
+            app.MoveCam(tracer.camera);
         }
     }
 
