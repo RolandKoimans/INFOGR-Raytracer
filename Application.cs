@@ -21,6 +21,7 @@ namespace Template
 
         public void MoveCam(Camera camera)
         {
+            state = Keyboard.GetState();
             if (state.IsKeyDown(Key.Left))
             {
                 camera.cameraPos.X++;
