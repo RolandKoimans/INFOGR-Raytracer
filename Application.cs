@@ -24,22 +24,42 @@ namespace Template
             state = Keyboard.GetState();
             if (state.IsKeyDown(Key.Left))
             {
-                camera.cameraPos.X++;
+                camera.cameraPos.X--;
             }
 
             else if (state.IsKeyDown(Key.Right))
             {
-                camera.cameraPos.X--;
+                camera.cameraPos.X++;
             }
 
             else if (state.IsKeyDown(Key.Up))
             {
-                camera.cameraPos.Y++;
+                camera.cameraPos.Y--;
             }
 
             else if (state.IsKeyDown(Key.Down))
             {
-                camera.cameraPos.Y--;
+                camera.cameraPos.Y++;
+            }
+
+            else if (state.IsKeyDown(Key.A))
+            {
+                camera.viewDirection.X -= 0.1f;
+            }
+
+            else if (state.IsKeyDown(Key.D))
+            {
+                camera.viewDirection.X += 0.1f;
+            }
+
+            else if (state.IsKeyDown(Key.W))
+            {
+                camera.viewDirection.Y -= 0.1f;
+            }
+
+            else if (state.IsKeyDown(Key.S))
+            {
+                camera.viewDirection.Y += 0.1f;
             }
         }
     }

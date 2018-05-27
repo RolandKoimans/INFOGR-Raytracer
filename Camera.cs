@@ -12,7 +12,7 @@ namespace Template
     class Camera
     {
         public Vector3 cameraPos = new Vector3(0, 0, 0);
-        Vector3 viewDirection = new Vector3(0, 0, 1);
+        public Vector3 viewDirection = new Vector3(0, 0, 1);
 
         float FOV = 1;
         public Vector3 p1, p2, p3;

@@ -20,7 +20,17 @@ namespace Template
         // initialize
         public void Init()
         {
-
+            Console.WriteLine("To move the camera, use the following controls:\n");
+            Console.WriteLine();
+            Console.WriteLine("Left: left arrow key\n");
+            Console.WriteLine("Right: right arrow key\n");
+            Console.WriteLine("Up: up arrow key\n");
+            Console.WriteLine("Down: down arrow key\n");
+            Console.WriteLine();
+            Console.WriteLine("Rotate view to left: A\n");
+            Console.WriteLine("Rotate view to right: D\n");
+            Console.WriteLine("Rotate view upwards: W\n");
+            Console.WriteLine("Rotate view downwards: S\n");
         }
 
         public void Tick()
