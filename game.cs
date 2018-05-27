@@ -22,15 +22,17 @@ namespace Template
         {
             Console.WriteLine("To move the camera, use the following controls:\n");
             Console.WriteLine();
-            Console.WriteLine("Left: left arrow key\n");
-            Console.WriteLine("Right: right arrow key\n");
-            Console.WriteLine("Up: up arrow key\n");
-            Console.WriteLine("Down: down arrow key\n");
+            Console.WriteLine("Left: A\n");
+            Console.WriteLine("Right: D\n");
+            Console.WriteLine("Up: W\n");
+            Console.WriteLine("Down: S\n");
+            Console.WriteLine("Forward: Q\n");
+            Console.WriteLine("Bachward: E\n");
             Console.WriteLine();
-            Console.WriteLine("Rotate view to left: A\n");
-            Console.WriteLine("Rotate view to right: D\n");
-            Console.WriteLine("Rotate view upwards: W\n");
-            Console.WriteLine("Rotate view downwards: S\n");
+            Console.WriteLine("Rotate view to left: Left arrow key\n");
+            Console.WriteLine("Rotate view to right: Right arrow key\n");
+            Console.WriteLine("Rotate view upwards: Up arrow key\n");
+            Console.WriteLine("Rotate view downwards: Down arrow key\n");
         }
 
         public void Tick()
