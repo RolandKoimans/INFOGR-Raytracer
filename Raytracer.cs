@@ -13,7 +13,7 @@ namespace Template
     {
         public Vector3 rayDir;
         public Camera camera = new Camera();
-        Scene scene = new Scene();
+        public Scene scene = new Scene();
 
         public Vector2 circleEq;
 

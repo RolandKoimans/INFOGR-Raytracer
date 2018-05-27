@@ -37,7 +37,7 @@ namespace Template
 
         public void Tick()
         {
-            //tracer.Render(512,512);
+
             for (int i = 0; i < 512; i++)
             {
                 for (int j = 0; j < 512; j++)
@@ -48,15 +48,7 @@ namespace Template
 
                     Vector3 floatcolor = tracer.Render(u, v);
 
-                    float clampx = Math.Min(floatcolor.X, 1);
-                    float clampy = Math.Min(floatcolor.Y, 1);
-                    float clampz = Math.Min(floatcolor.Z, 1);
-
-                    int redcomponent = (int)(255 * floatcolor.X);
-                    int greencomponent = (int)(255 * floatcolor.Y);
-                    int bluecomponent = (int)(255 * floatcolor.Z);
-
-                    int intcolor = (redcomponent << 16) + (greencomponent << 8) + bluecomponent;
+                    int intcolor = getIntColor(floatcolor);
 
                     screen.pixels[location] = intcolor;
 
@@ -76,25 +68,80 @@ namespace Template
 
             //Draws every sphere, including its own offset and a bonus offset, so that the spheres don't cling to the edges.
             //Color offset is a cheap solution to give the spheres a different color each time.
-            int coloroffset = 0x00ff00;
+
             foreach (Sphere sphere in scene.sphereList)
             {
-                coloroffset *= 256 + 100;
+                int intcolor = getIntColor(sphere.material.color);
                 for (int theta = 0; theta < 360; theta++)
                 {
-                    double xcord = sphere.rad * 10 * Math.Cos(theta);
-                    double ycord = sphere.rad * 10 * Math.Sin(theta);
-                    int offsetX = (int)sphere.spherePos.X;
-                    int offsetY = (int)sphere.spherePos.Y;
-                    screen.Plot((int)xcord + offsetX + 750, (int)ycord + offsetY + 256, coloroffset);
+                    double xcord = sphere.rad * 5 * Math.Cos(theta);
+                    double ycord = sphere.rad * 5 * Math.Sin(theta);
+                    int offsetX = 5 * (int)sphere.spherePos.X;
+                    int offsetZ = 5 * (int)sphere.spherePos.Z * -1;
+                    screen.Plot((int)xcord + offsetX + 750, (int)ycord + offsetZ + 400, intcolor);
                 }
             }
+
+            //Draws the camera in the debug view
+            screen.Plot((int)tracer.camera.cameraPos.X + 750, (int)tracer.camera.cameraPos.Z * -1 + 400, 0xff0000);
+
+            //Draws the primary rays in the debug view
+            for (float j = 0; j < 1f; j += 0.1f)
+            {
+                Ray primaryray = tracer.camera.getRay(j, 0.5f);
+                float t = 50;
+
+                foreach (Primitive prim in tracer.scene.sphereList)
+                {
+                    Intersection intersect = prim.Intersect(primaryray);
+                    if (intersect != null)
+                    {
+                        if (intersect.distance < t)
+                        {
+                            t = intersect.distance;
+                        }
+
+                    }
+
+                }
+
+                float originx = primaryray.Origin.X;
+                float originz = primaryray.Origin.Z;
+
+                float targetx = (primaryray.Origin.X + t * primaryray.Direction.X) * 5;
+                float targetz = (primaryray.Origin.Z + t * primaryray.Direction.Z) * 5;
+
+                screen.Line((int)originx + 750, (int)originz * -1 + 400, (int)targetx + 750, (int)targetz * -1 + 400, 0xffff00);
+
+
+
+            }
+
 
             //Draws a seperation line.
             screen.Line(512, 0, 512, 512, 0xff0000);
 
             app.MoveCam(tracer.camera);
         }
+
+        public int getIntColor(Vector3 floatcolor)
+        {
+            //Converts a color stored as floating point vector to integer value
+
+            float clampx = Math.Min(floatcolor.X, 1);
+            float clampy = Math.Min(floatcolor.Y, 1);
+            float clampz = Math.Min(floatcolor.Z, 1);
+
+            int redcomponent = (int)(255 * floatcolor.X);
+            int greencomponent = (int)(255 * floatcolor.Y);
+            int bluecomponent = (int)(255 * floatcolor.Z);
+
+            int intcolor = (redcomponent << 16) + (greencomponent << 8) + bluecomponent;
+
+            return intcolor;
+        }
+
+
     }
 
 } // namespace Template
