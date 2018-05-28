@@ -15,7 +15,7 @@ namespace Template
         public Scene scene = new Scene();
 
         public Vector2 circleEq;
-
+        public float epsilon;
 
         public Raytracer()
         {
@@ -58,6 +58,11 @@ namespace Template
                 {
                     currentcolor = currentcolor * 0;
                 }
+
+                else
+                {
+                    //currentcolor =
+                }
                 return currentcolor;
             }
 
@@ -71,8 +76,8 @@ namespace Template
             Vector3 intersP = new Vector3(intersection.ray.Origin + intersection.distance * intersection.ray.Direction);
             Vector3 shadowDir = new Vector3( Vector3.Normalize(light.lightPos - intersP));
 
-            float t = 10;
-            float epsilon = 0.001f;
+            //float t = 10000;
+            epsilon = 0.001f;
 
             Vector3 offsetIntersP = intersP + epsilon * shadowDir;
 
@@ -85,19 +90,11 @@ namespace Template
 
                 if (intersect != null)
                 {
-                    
+                    //Console.WriteLine(intersect.distance.ToString());
                     return false;
                 }
-
-            }
-            
-            
+            }            
             return true;
-
-            //if (/*placeholder*/t + 1 > 20)
-            //    return true;
-            //else
-            //    return false;
         }
 
 
