@@ -61,9 +61,9 @@ namespace Template
 
                 else
                 {
-                    currentcolor.X = currentcolor.X * scene.lightList[0].DistAtt(closestIntersect.distance).X;
-                    currentcolor.Y = currentcolor.Y * scene.lightList[0].DistAtt(closestIntersect.distance).Y;
-                    currentcolor.Z = currentcolor.Z * scene.lightList[0].DistAtt(closestIntersect.distance).Z;
+                    currentcolor.X = Math.Min(currentcolor.X * scene.lightList[0].DistAtt(closestIntersect.distance).X,1f);
+                    currentcolor.Y = Math.Min(currentcolor.Y * scene.lightList[0].DistAtt(closestIntersect.distance).Y, 1f);
+                    currentcolor.Z = Math.Min(currentcolor.Z * scene.lightList[0].DistAtt(closestIntersect.distance).Z, 1f);
                     //Console.WriteLine(scene.lightList[0].DistAtt(closestIntersect.distance).X.ToString());
                 }
                 return currentcolor;
