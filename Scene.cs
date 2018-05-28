@@ -18,12 +18,17 @@ namespace Template
 
         public Scene()
         {
-            Vector3 mainLPos = new Vector3(-1, -10, -3);
-            Vector3 mainLInt = new Vector3(5f, 5f, 5f);
+            Vector3 mainLPos = new Vector3(0, -10, -1);
+            Vector3 mainLInt = new Vector3(2000, 2000, 1800);
             Light mainLight = new Light(mainLPos, mainLInt);
             lightList.Add(mainLight);
 
-       
+            Vector3 light2Pos = new Vector3(5, -10, 10);
+            Vector3 light2Int = new Vector3(5000, 5000, 1);
+            Light light2 = new Light(light2Pos, light2Int);
+            lightList.Add(light2);
+            
+
             Sphere sphere1 = new Sphere(4, -5, 0, 20)
             {
                 material = new Material(new Vector3(1, 0, 0))
@@ -46,8 +51,11 @@ namespace Template
             primitives.Add(sphere3);
             sphereList.Add(sphere3);
 
-
-            Plane plane1 = new Plane(new Vector3(0, 1, 0), new Vector3(0,5,0))
+                       
+            float a = 0;
+            float b = 0;
+            int Checkboard = ((int)(2 * a) +(int)b) & 1;
+            Plane plane1 = new Plane(new Vector3(0, 1, 0), new Vector3(0, 5, 0))
             {
                 material = new Material(new Vector3(0.5f,0.9f,0.2f))
             };

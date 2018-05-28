@@ -13,8 +13,7 @@ namespace Template
 
         Raytracer tracer = new Raytracer();
         Application app = new Application();
-        //Camera camera = new Camera();
-        Scene scene = new Scene();
+      
         // member variables
         public Surface screen;
         // initialize
@@ -69,7 +68,7 @@ namespace Template
             //Draws every sphere, including its own offset and a bonus offset, so that the spheres don't cling to the edges.
             //Color offset is a cheap solution to give the spheres a different color each time.
 
-            foreach (Sphere sphere in scene.sphereList)
+            foreach (Sphere sphere in tracer.scene.sphereList)
             {
                 int intcolor = getIntColor(sphere.material.color);
                 for (int theta = 0; theta < 360; theta++)

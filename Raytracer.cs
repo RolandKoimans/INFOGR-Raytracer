@@ -15,7 +15,7 @@ namespace Template
         public Scene scene = new Scene();
 
         public Vector2 circleEq;
-        public float epsilon;
+        public float epsilon, shadowdist;
 
         public Raytracer()
         {
@@ -52,21 +52,24 @@ namespace Template
             // If intersect, check color
             if (closestIntersect != null)
             {
-                IsVisible(closestIntersect, scene.lightList[0]);
-                Vector3 currentcolor = closestIntersect.currentobject.material.color;
-                if (!IsVisible(closestIntersect, scene.lightList[0]))
+                foreach (Light light in scene.lightList)
                 {
-                    currentcolor = currentcolor * 0;
-                }
+                    IsVisible(closestIntersect, light);
+                    Vector3 currentcolor = closestIntersect.currentobject.material.color;
 
-                else
-                {
-                    currentcolor.X = Math.Min(currentcolor.X * scene.lightList[0].DistAtt(closestIntersect.distance).X,1f);
-                    currentcolor.Y = Math.Min(currentcolor.Y * scene.lightList[0].DistAtt(closestIntersect.distance).Y, 1f);
-                    currentcolor.Z = Math.Min(currentcolor.Z * scene.lightList[0].DistAtt(closestIntersect.distance).Z, 1f);
-                    //Console.WriteLine(scene.lightList[0].DistAtt(closestIntersect.distance).X.ToString());
+                    if (!IsVisible(closestIntersect, light))
+                    {
+                        currentcolor = currentcolor * 0;
+                    }
+
+                    else
+                    {
+                        currentcolor.X = Math.Min(currentcolor.X * light.DistAtt(shadowdist).X, 1f);
+                        currentcolor.Y = Math.Min(currentcolor.Y * light.DistAtt(shadowdist).Y, 1f);
+                        currentcolor.Z = Math.Min(currentcolor.Z * light.DistAtt(shadowdist).Z, 1f);
+                    }
+                    return currentcolor;
                 }
-                return currentcolor;
             }
 
             // Return black when there is no intersection
@@ -79,7 +82,8 @@ namespace Template
             Vector3 intersP = new Vector3(intersection.ray.Origin + intersection.distance * intersection.ray.Direction);
             Vector3 shadowDir = new Vector3( Vector3.Normalize(light.lightPos - intersP));
 
-            //float t = 10000;
+            
+            
             epsilon = 0.001f;
 
             Vector3 offsetIntersP = intersP + epsilon * shadowDir;
@@ -92,11 +96,11 @@ namespace Template
                 Intersection intersect = prim.Intersect(shadowRay);
 
                 if (intersect != null)
-                {
-                    //Console.WriteLine(intersect.distance.ToString());
+                {                    
                     return false;
                 }
-            }            
+            }
+            shadowdist = intersection.distance;
             return true;
         }
 

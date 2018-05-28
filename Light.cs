@@ -21,7 +21,7 @@ namespace Template
 
         public Vector3 DistAtt(float distance)
         {
-            Vector3 energy = intensity * 1000 * (1 / (4 * (float)Math.PI * (distance * distance)));
+            Vector3 energy = intensity *(1 / (4 * (float)Math.PI * (distance * distance)));
             return energy;
         }
     }
