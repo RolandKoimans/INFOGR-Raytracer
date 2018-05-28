@@ -51,14 +51,14 @@ namespace Template
             primitives.Add(sphere3);
             sphereList.Add(sphere3);
 
-                       
-            float a = 0;
-            float b = 0;
-            int Checkboard = ((int)(2 * a) +(int)b) & 1;
-            Plane plane1 = new Plane(new Vector3(0, 1, 0), new Vector3(0, 5, 0))
-            {
-                material = new Material(new Vector3(0.5f,0.9f,0.2f))
-            };
+            Plane plane1 = new Plane(new Vector3(0, 1, 0), new Vector3(0, 5, 0));
+            for (int a = -10; a < 10; a++)
+                for (int b = 0; b < 20; b++)
+                {
+                    int Checkboard = ((2 * a) + b) & 1;
+                    plane1.material = new Material(new Vector3(1f, 1f, 1f) * Checkboard);
+                }           
+           
             primitives.Add(plane1);
 
         }
