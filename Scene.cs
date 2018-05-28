@@ -18,7 +18,7 @@ namespace Template
 
         public Scene()
         {
-            Vector3 mainLPos = new Vector3(-1, 2, -1);
+            Vector3 mainLPos = new Vector3(5, 10, -3);
             Vector3 mainLInt = new Vector3(0.5f, 0.5f, 0);
             Light mainLight = new Light(mainLPos, mainLInt);
             lightList.Add(mainLight);

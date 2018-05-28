@@ -85,6 +85,8 @@ namespace Template
             //Draws the camera in the debug view
             screen.Plot((int)tracer.camera.cameraPos.X + 750, (int)tracer.camera.cameraPos.Z * -1 + 400, 0xff0000);
 
+            screen.Plot((int)tracer.scene.lightList[0].lightPos.X + 750, (int)tracer.scene.lightList[0].lightPos.Z * -1 + 400, 0xcc66ff);
+
             //Draws the primary rays in the debug view
             for (float j = 0; j < 1f; j += 0.1f)
             {

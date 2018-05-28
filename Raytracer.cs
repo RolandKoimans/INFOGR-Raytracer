@@ -49,10 +49,16 @@ namespace Template
                 }
             }
 
-            // If intersect, then return distance as color
+            // If intersect, check color
             if (closestIntersect != null)
             {
-                return closestIntersect.currentobject.material.color;
+                IsVisible(closestIntersect, scene.lightList[0]);
+                Vector3 currentcolor = closestIntersect.currentobject.material.color;
+                if(!IsVisible(closestIntersect, scene.lightList[0]))
+                {
+                    currentcolor = currentcolor * 0;
+                }
+                return currentcolor;
             }
 
             // Return black when there is no intersection
@@ -66,15 +72,32 @@ namespace Template
             Vector3 shadowDir = new Vector3( Vector3.Normalize(light.lightPos - intersP));
 
             float t = 10;
+            float epsilon = 0.001f;
 
+            Vector3 offsetIntersP = intersP + epsilon * shadowDir;
 
-            Ray shadowRay = new Ray(intersP, shadowDir);
+            Ray shadowRay = new Ray(offsetIntersP, shadowDir);
+            
 
+            foreach(Primitive prim in scene.primitives)
+            {
+                Intersection intersect = prim.Intersect(shadowRay);
 
-            if (/*placeholder*/t + 1 > 20)
-                return true;
-            else
-                return false;
+                if (intersect != null)
+                {
+                    
+                    return false;
+                }
+
+            }
+            
+            
+            return true;
+
+            //if (/*placeholder*/t + 1 > 20)
+            //    return true;
+            //else
+            //    return false;
         }
 
 
