@@ -54,7 +54,7 @@ namespace Template
             {
                 foreach (Light light in scene.lightList)
                 {
-                    IsVisible(closestIntersect, light);
+                    
                     Vector3 currentcolor = closestIntersect.currentobject.material.color;
 
                     if (!IsVisible(closestIntersect, light))
@@ -100,7 +100,7 @@ namespace Template
                     return false;
                 }
             }
-            shadowdist = intersection.distance;
+            shadowdist = (float)Math.Sqrt((light.lightPos.X - intersP.X) * (light.lightPos.X - intersP.X) + (light.lightPos.Y - intersP.Y) * (light.lightPos.Y - intersP.Y) + (light.lightPos.Z - intersP.Z) * (light.lightPos.Z - intersP.Z));
             return true;
         }
 
