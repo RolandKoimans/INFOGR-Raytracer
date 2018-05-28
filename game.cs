@@ -27,7 +27,7 @@ namespace Template
             Console.WriteLine("Up: W\n");
             Console.WriteLine("Down: S\n");
             Console.WriteLine("Forward: Q\n");
-            Console.WriteLine("Bachward: E\n");
+            Console.WriteLine("Backward: E\n");
             Console.WriteLine();
             Console.WriteLine("Rotate view to left: Left arrow key\n");
             Console.WriteLine("Rotate view to right: Right arrow key\n");

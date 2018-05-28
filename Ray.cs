@@ -11,7 +11,7 @@ namespace Template
 {
     class Ray
     {
-        // Ray class, containing the origin vector, the direction vector and distance t
+        // Ray class, containing the origin vector and the direction vector
         public Vector3 Origin;
         public Vector3 Direction;
 

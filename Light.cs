@@ -11,13 +11,12 @@ namespace Template
 {
     class Light
     {
-        Vector3 lightPos, intensity;
+        public Vector3 lightPos, intensity;
 
-        public Light()
+        public Light(Vector3 pos, Vector3 inten)
         {
-            Light mainLight = new Light();
-            mainLight.lightPos = new Vector3(20, 50, -10); //should become screen.x/2 and screen.y/2 (or higher)
-            mainLight.intensity = new Vector3(0.5f, 0.5f, 0); // should be yellow-ish
+            lightPos = pos;
+            intensity = inten;
         }
     }
 }

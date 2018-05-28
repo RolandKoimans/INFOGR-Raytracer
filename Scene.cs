@@ -13,11 +13,15 @@ namespace Template
     {
         public List<Primitive> primitives = new List<Primitive>();
         public List<Primitive> sphereList = new List<Primitive>();
+        public List<Light> lightList = new List<Light>();
 
 
         public Scene()
         {
-
+            Vector3 mainLPos = new Vector3(-1, 2, -1);
+            Vector3 mainLInt = new Vector3(0.5f, 0.5f, 0);
+            Light mainLight = new Light(mainLPos, mainLInt);
+            lightList.Add(mainLight);
 
        
             Sphere sphere1 = new Sphere(4, -5, 0, 20)

@@ -11,7 +11,6 @@ namespace Template
 {
     class Raytracer
     {
-        public Vector3 rayDir;
         public Camera camera = new Camera();
         public Scene scene = new Scene();
 
@@ -60,6 +59,23 @@ namespace Template
             return Vector3.Zero;
         }
 
+
+        public bool IsVisible(Intersection intersection, Light light)
+        {
+            Vector3 intersP = new Vector3(intersection.ray.Origin + intersection.distance * intersection.ray.Direction);
+            Vector3 shadowDir = new Vector3( Vector3.Normalize(light.lightPos - intersP));
+
+            float t = 10;
+
+
+            Ray shadowRay = new Ray(intersP, shadowDir);
+
+
+            if (/*placeholder*/t + 1 > 20)
+                return true;
+            else
+                return false;
+        }
 
 
         public void DrawPrimsDebug()
