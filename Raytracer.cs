@@ -54,14 +54,17 @@ namespace Template
             {
                 IsVisible(closestIntersect, scene.lightList[0]);
                 Vector3 currentcolor = closestIntersect.currentobject.material.color;
-                if(!IsVisible(closestIntersect, scene.lightList[0]))
+                if (!IsVisible(closestIntersect, scene.lightList[0]))
                 {
                     currentcolor = currentcolor * 0;
                 }
 
                 else
                 {
-                    //currentcolor =
+                    currentcolor.X = currentcolor.X * scene.lightList[0].DistAtt(closestIntersect.distance).X;
+                    currentcolor.Y = currentcolor.Y * scene.lightList[0].DistAtt(closestIntersect.distance).Y;
+                    currentcolor.Z = currentcolor.Z * scene.lightList[0].DistAtt(closestIntersect.distance).Z;
+                    //Console.WriteLine(scene.lightList[0].DistAtt(closestIntersect.distance).X.ToString());
                 }
                 return currentcolor;
             }
