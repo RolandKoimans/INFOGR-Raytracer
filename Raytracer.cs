@@ -54,7 +54,7 @@ namespace Template
             {
                 foreach (Light light in scene.lightList)
                 {
-                    
+
                     Vector3 currentcolor = closestIntersect.currentobject.material.color;
 
                     if (!IsVisible(closestIntersect, light))
@@ -64,6 +64,19 @@ namespace Template
 
                     else
                     {
+                        if (closestIntersect.currentobject == scene.primitives[3])
+                        {
+                            Vector3 point = closestIntersect.ray.Origin + closestIntersect.distance * closestIntersect.ray.Direction;
+                            if ((int)point.X % 2 == 1 ^ (int)point.Z % 2 == 1  ^ (int)point.X*-1 % 2 == 1 )
+                            {
+                                currentcolor = new Vector3(0.1f, 0.1f, 0.1f);
+                            }
+                            else
+                            {
+                                currentcolor = new Vector3(1f, 1f, 1f);
+                            }
+                        }
+
                         currentcolor.X = Math.Min(currentcolor.X * light.DistAtt(shadowdist).X, 1f);
                         currentcolor.Y = Math.Min(currentcolor.Y * light.DistAtt(shadowdist).Y, 1f);
                         currentcolor.Z = Math.Min(currentcolor.Z * light.DistAtt(shadowdist).Z, 1f);
@@ -80,23 +93,23 @@ namespace Template
         public bool IsVisible(Intersection intersection, Light light)
         {
             Vector3 intersP = new Vector3(intersection.ray.Origin + intersection.distance * intersection.ray.Direction);
-            Vector3 shadowDir = new Vector3( Vector3.Normalize(light.lightPos - intersP));
+            Vector3 shadowDir = new Vector3(Vector3.Normalize(light.lightPos - intersP));
 
-            
-            
+
+
             epsilon = 0.001f;
 
             Vector3 offsetIntersP = intersP + epsilon * shadowDir;
 
             Ray shadowRay = new Ray(offsetIntersP, shadowDir);
-            
 
-            foreach(Primitive prim in scene.primitives)
+
+            foreach (Primitive prim in scene.primitives)
             {
                 Intersection intersect = prim.Intersect(shadowRay);
 
                 if (intersect != null)
-                {                    
+                {
                     return false;
                 }
             }
