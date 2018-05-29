@@ -54,22 +54,20 @@ namespace Template
             if (closestIntersect != null)
             {
                 Vector3 currentcolor = closestIntersect.currentobject.material.color;
+                
+                bool occluded = true;
 
                 foreach (Light light in scene.lightList)
                 {
                     
-                    if (!IsVisible(closestIntersect, light))
+                    if (IsVisible(closestIntersect, light))
                     {
-                        currentcolor = currentcolor * 0;
-                    }
-
-                    else
-                    {
+                        occluded = false;
                         //If floorplane, then apply checkered texture
                         if (closestIntersect.currentobject == scene.primitives[3])
                         {
                             Vector3 point = closestIntersect.ray.Origin + closestIntersect.distance * closestIntersect.ray.Direction;
-                            if ((int)point.X % 2 == 1 ^ (int)point.Z % 2 == 1  ^ (int)point.X*-1 % 2 == 1 ^ (int)point.Z*-1 % 2 == 1)
+                            if ((int)point.X % 2 == 1 ^ (int)point.Z % 2 == 1 ^ (int)point.X * -1 % 2 == 1 ^ (int)point.Z * -1 % 2 == 1)
                             {
                                 currentcolor = new Vector3(0.1f, 0.1f, 0.1f);
                             }
@@ -79,7 +77,8 @@ namespace Template
                             }
                         }
                         //Checks for reflection, adds a cap for max recursion
-                        if (cap < 2){
+                        if (cap < 2)
+                        {
                             cap++;
                             currentcolor = AdjustReflection(currentcolor, cap, closestIntersect);
                         }
@@ -91,9 +90,13 @@ namespace Template
                         currentcolor.Y = Math.Min(currentcolor.Y * light.DistAtt(shadowdist).Y, 1f);
                         currentcolor.Z = Math.Min(currentcolor.Z * light.DistAtt(shadowdist).Z, 1f);
                     }
-                    
+
+                    else if (occluded && !IsVisible(closestIntersect, light))
+                    {
+                        currentcolor = currentcolor * 0;
+                    }                  
                               
-                }
+                }                
                 return currentcolor;
             }
 
