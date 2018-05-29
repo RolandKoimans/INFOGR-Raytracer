@@ -89,6 +89,14 @@ namespace Template
             return Vector3.Zero;
         }
 
+        public Ray GetSecondaryRay(Intersection intersection)
+        {
+            Ray secRay;
+            Vector3 secOr = new Vector3(intersection.ray.Origin + intersection.distance * intersection.ray.Direction);
+            Vector3 secDir = new Vector3(2 * intersection.normal * (intersection.normal * intersection.ray.Direction) - intersection.ray.Direction);
+
+            return secRay = new Ray(secOr, secDir);
+        }
 
         public bool IsVisible(Intersection intersection, Light light)
         {
