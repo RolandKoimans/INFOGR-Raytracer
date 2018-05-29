@@ -90,32 +90,7 @@ namespace Template
             }
 
 
-            //Draws the primary rays in the debug view
-            //for (float j = 0; j < 1f; j += 0.1f)
-            //{
-            //    Ray primaryray = tracer.camera.getRay(j, 0.5f);
-            //    float t = 50;
-
-            //    foreach (Primitive prim in tracer.scene.sphereList)
-            //    {
-            //        Intersection intersect = prim.Intersect(primaryray);
-            //        if (intersect != null)
-            //        {
-            //            if (intersect.distance < t)
-            //            {
-            //                t = intersect.distance;
-            //            }
-            //        }
-            //    }
-
-            //    float originx = primaryray.Origin.X;
-            //    float originz = primaryray.Origin.Z;
-
-            //    float targetx = (primaryray.Origin.X + t * primaryray.Direction.X) * 5;
-            //    float targetz = (primaryray.Origin.Z + t * primaryray.Direction.Z) * 5;
-
-
-            //Console.WriteLine(tracer.raylist.Count.ToString());
+            //Draws the primary rays in the debug view          
             for (int i = 0; i < tracer.raylist.Count; i++)
             {
                 float t = 50;
@@ -140,36 +115,33 @@ namespace Template
                 screen.Line((int)primOx + 750, (int)primOz * -1 + 400, (int)primTx + 750, (int)primTz * -1 + 400, 0xffff00);
             }
 
+
+            // should have drawn the shadow rays, does not do so correctly. 
             for (int i = 0; i < tracer.shadowlist.Count; i++)
             {
-                float s = 50;
-                foreach (Primitive prim in tracer.scene.sphereList)
-                {
-                    Intersection intersect = prim.Intersect(tracer.shadowlist[i]);
-                    if (intersect != null)
-                    {
-                        if (intersect.distance < s)
-                        {
-                            s = intersect.distance;
-                        }
-                    }
-                }
+                float shadowdist;
 
                 float shadOx = tracer.shadowlist[i].Origin.X;
+                float shadOy = tracer.shadowlist[i].Origin.Y;
                 float shadOz = tracer.shadowlist[i].Origin.Z;
 
-                float shadTx = (shadOx + s * tracer.shadowlist[i].Direction.X) * 5;
-                float shadTz = (shadOz + s * tracer.shadowlist[i].Direction.Z) * 5;
+                foreach (Light light in tracer.scene.lightList)
+                {
+                    shadowdist = (float)Math.Sqrt((light.lightPos.X - shadOx) * (light.lightPos.X - shadOx) + (light.lightPos.Y - shadOy) * (light.lightPos.Y - shadOy) + (light.lightPos.Z - shadOz) * (light.lightPos.Z - shadOz));
+                    float shadTx = (shadOx + shadowdist * tracer.shadowlist[i].Direction.X) * 5;
+                    float shadTz = (shadOz + shadowdist * tracer.shadowlist[i].Direction.Z) * 5;
 
-                screen.Line((int)shadOx + 750, (int)shadOz * -1 + 400, (int)shadTx + 750, (int)shadTz * -1 + 400, 0x80ff00);
+                    screen.Line((int)shadOx + 750, (int)shadOz * -1 + 400, (int)shadTx + 750, (int)shadTz * -1 + 400, 0xff8000);
+                }
             }
 
+            // should have drawn the secondary rays, does not do so correctly.
             for (int i = 0; i < tracer.secondarylist.Count; i++)
             { 
                 float r = 50;
                 foreach (Primitive prim in tracer.scene.sphereList)
                 {
-                    Intersection intersect = prim.Intersect(tracer.shadowlist[i]);
+                    Intersection intersect = prim.Intersect(tracer.secondarylist[i]);
                     if (intersect != null)
                     {
                         if (intersect.distance < r)
@@ -190,12 +162,6 @@ namespace Template
             tracer.raylist.Clear();
             tracer.shadowlist.Clear();
             tracer.secondarylist.Clear();
-
-
-            //screen.Line((int)originx + 750, (int)originz * -1 + 400, (int)targetx + 750, (int)targetz * -1 + 400, 0xffff00);
-            // }
-
-            //Draws the secondary rays in the debug view
 
             //Draws a seperation line.
             screen.Line(512, 0, 512, 512, 0xff0000);

@@ -17,7 +17,6 @@ namespace Template
         public List<Ray> shadowlist = new List<Ray>();
         public List<Ray> secondarylist = new List<Ray>();
 
-        //public Vector2 circleEq;
         public float epsilon, shadowdist;
 
         public Raytracer()
@@ -28,7 +27,7 @@ namespace Template
         public Vector3 Render(float u, float v)
         {
             Ray ray = camera.getRay(u, v);
-            if (u % (40f/512f) == 0 /*&& v % (40f/512f) == 0*/ && ray.Direction.Y == 0)
+            if (u % (40f/512f) == 0 && ray.Direction.Y == 0)
             {
                 raylist.Add(ray);
             }
@@ -154,12 +153,8 @@ namespace Template
 
             Vector3 offsetIntersP = intersP + epsilon * shadowDir;
 
-            Ray shadowRay = new Ray(offsetIntersP, shadowDir);
-            if (raylist.Contains(intersection.ray))
-            {
-                shadowlist.Add(shadowRay);
-            }
 
+            Ray shadowRay = new Ray(offsetIntersP, shadowDir);
 
             foreach (Primitive prim in scene.primitives)
             {
@@ -169,8 +164,13 @@ namespace Template
                 {
                     return false;
                 }
-            }
-           // shadowdist = (float)Math.Sqrt((light.lightPos.X - intersP.X) * (light.lightPos.X - intersP.X) + (light.lightPos.Y - intersP.Y) * (light.lightPos.Y - intersP.Y) + (light.lightPos.Z - intersP.Z) * (light.lightPos.Z - intersP.Z));
+
+                
+                if (raylist.Contains(intersection.ray))
+                {
+                    shadowlist.Add(shadowRay);
+                }
+            }          
             return true;
         }
 

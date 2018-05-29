@@ -30,7 +30,7 @@ namespace Template
 
         public override Intersection Intersect(Ray ray)
         {
-            Vector3 c = this.spherePos - ray.Origin; //vector from vector origin to center of sphere           
+            Vector3 c = this.spherePos - ray.Origin; 
                 
             float t = Vector3.Dot(c, ray.Direction);
 

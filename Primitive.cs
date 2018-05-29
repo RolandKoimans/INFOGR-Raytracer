@@ -22,7 +22,6 @@ namespace Template
         public virtual Intersection Intersect(Ray ray)
         {
             return null;
-        }        
-        // calculates dot product of two vectors. 
+        }                
     }
 }
