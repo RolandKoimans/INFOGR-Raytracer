@@ -67,7 +67,7 @@ namespace Template
                         if (closestIntersect.currentobject == scene.primitives[3])
                         {
                             Vector3 point = closestIntersect.ray.Origin + closestIntersect.distance * closestIntersect.ray.Direction;
-                            if ((int)point.X % 2 == 1 ^ (int)point.Z % 2 == 1  ^ (int)point.X*-1 % 2 == 1 )
+                            if ((int)point.X % 2 == 1 ^ (int)point.Z % 2 == 1  ^ (int)point.X*-1 % 2 == 1 ^ (int)point.Z*-1 % 2 == 1)
                             {
                                 currentcolor = new Vector3(0.1f, 0.1f, 0.1f);
                             }
