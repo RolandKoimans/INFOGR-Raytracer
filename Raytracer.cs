@@ -13,6 +13,9 @@ namespace Template
     {
         public Camera camera = new Camera();
         public Scene scene = new Scene();
+        public List<Ray> raylist = new List<Ray>();
+        public List<Ray> shadowlist = new List<Ray>();
+        public List<Ray> secondarylist = new List<Ray>();
 
         //public Vector2 circleEq;
         public float epsilon, shadowdist;
@@ -25,6 +28,10 @@ namespace Template
         public Vector3 Render(float u, float v)
         {
             Ray ray = camera.getRay(u, v);
+            if (u % (40f/512f) == 0 /*&& v % (40f/512f) == 0*/ && ray.Direction.Y == 0)
+            {
+                raylist.Add(ray);
+            }
             int cap = 0;
             return Trace(ray, cap);
         }
@@ -126,8 +133,13 @@ namespace Template
             Ray secRay;
             Vector3 secOr = new Vector3(intersection.ray.Origin + intersection.distance * intersection.ray.Direction);
             Vector3 secDir = new Vector3(2 * intersection.normal * Vector3.Dot(intersection.normal, intersection.ray.Direction) - intersection.ray.Direction);
+            secRay = new Ray(secOr, secDir);
+            if (raylist.Contains(intersection.ray))
+            {
+                secondarylist.Add(secRay);
+            }
 
-            return secRay = new Ray(secOr, secDir);
+            return secRay;
         }
 
         public bool IsVisible(Intersection intersection, Light light)
@@ -143,6 +155,10 @@ namespace Template
             Vector3 offsetIntersP = intersP + epsilon * shadowDir;
 
             Ray shadowRay = new Ray(offsetIntersP, shadowDir);
+            if (raylist.Contains(intersection.ray))
+            {
+                shadowlist.Add(shadowRay);
+            }
 
 
             foreach (Primitive prim in scene.primitives)
