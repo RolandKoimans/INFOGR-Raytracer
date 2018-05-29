@@ -23,22 +23,22 @@ namespace Template
             Light mainLight = new Light(mainLPos, mainLInt);
             lightList.Add(mainLight);
 
-            Vector3 light2Pos = new Vector3(5, -10, 10);
+            Vector3 light2Pos = new Vector3(5, -10, 5);
             Vector3 light2Int = new Vector3(5000, 5000, 1);
             Light light2 = new Light(light2Pos, light2Int);
             lightList.Add(light2);
             
 
-            Sphere sphere1 = new Sphere(4, -5, 0, 20)
+            Sphere sphere1 = new Sphere(2, -8, 0, 15)
             {
                 material = new Material(new Vector3(1, 0, 0))
                 
             };
-            sphere1.material.IsReflective = false;
+            sphere1.material.IsReflective = true;
             primitives.Add(sphere1);
             sphereList.Add(sphere1);
 
-            Sphere sphere2 = new Sphere(5, 0, 0, 30)
+            Sphere sphere2 = new Sphere(5, 0, -2, 30)
             {
                 material = new Material(new Vector3(1, 0, 1))
             };
@@ -46,7 +46,7 @@ namespace Template
             primitives.Add(sphere2);
             sphereList.Add(sphere2);
 
-            Sphere sphere3 = new Sphere(6, 5, 0, 35)
+            Sphere sphere3 = new Sphere(4, 6, 0, 20)
             {
                 material = new Material(new Vector3(0, 0, 1))
             };

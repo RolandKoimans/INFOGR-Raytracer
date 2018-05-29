@@ -15,15 +15,15 @@ namespace Template
         public Vector3 viewDirection = new Vector3(0, 0, 1);
 
         double FOV;
-        double fovAngle = 20;
+        //Adjustable FOV
+        double fovAngle = 10;
         public Vector3 p1, p2, p3;
         public Vector3 screenCenter = new Vector3(0, 0, 0);
 
 
         public Camera()
         {
-            FOV = 0.5 / Math.Tan(fovAngle);
-            Console.WriteLine(FOV);
+            FOV = 2 * Math.Tan((fovAngle*Math.PI) / 180.0);
             screenCenter = cameraPos + (float)FOV * viewDirection;
             p1 = screenCenter + new Vector3(-1, -1, 0); // bottom left
             p2 = screenCenter + new Vector3(1, -1, 0); // bottom right

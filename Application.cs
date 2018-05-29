@@ -12,6 +12,7 @@ namespace Template
 {
     class Application
     {
+        //This class is used for keyboard input. It changes the camera position.
         KeyboardState state;
 
         public Application()

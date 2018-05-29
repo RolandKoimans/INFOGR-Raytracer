@@ -53,10 +53,10 @@ namespace Template
             // If intersect, check color
             if (closestIntersect != null)
             {
+                Vector3 currentcolor = closestIntersect.currentobject.material.color;
+
                 foreach (Light light in scene.lightList)
                 {
-
-                    Vector3 currentcolor = closestIntersect.currentobject.material.color;
 
                     if (!IsVisible(closestIntersect, light))
                     {
@@ -65,6 +65,7 @@ namespace Template
 
                     else
                     {
+                        //If floorplane, then apply checkered texture
                         if (closestIntersect.currentobject == scene.primitives[3])
                         {
                             Vector3 point = closestIntersect.ray.Origin + closestIntersect.distance * closestIntersect.ray.Direction;
@@ -77,7 +78,7 @@ namespace Template
                                 currentcolor = new Vector3(1f, 1f, 1f);
                             }
                         }
-                        
+                        //Checks for reflection, adds a cap for max recursion
                         if (cap < 2){
                             cap++;
                             currentcolor = AdjustReflection(currentcolor, cap, closestIntersect);
@@ -86,6 +87,8 @@ namespace Template
                         currentcolor.Y = Math.Min(currentcolor.Y * light.DistAtt(shadowdist).Y, 1f);
                         currentcolor.Z = Math.Min(currentcolor.Z * light.DistAtt(shadowdist).Z, 1f);
                     }
+
+
                     return currentcolor;
                 }
             }
@@ -96,7 +99,7 @@ namespace Template
 
         public Vector3 AdjustReflection(Vector3 currentcolor, int currentdepth, Intersection intersect)
         {
-
+            //Gets new intersection using secondary ray, applies 50% of the new color
             if (intersect.currentobject.material.IsReflective == true)
             {
                 Ray secondaryRay = getSecondaryRay(intersect);
@@ -121,6 +124,7 @@ namespace Template
 
         public bool IsVisible(Intersection intersection, Light light)
         {
+            //Creates a shadowray to see if there is something between the object and a lightsource.
             Vector3 intersP = new Vector3(intersection.ray.Origin + intersection.distance * intersection.ray.Direction);
             Vector3 shadowDir = new Vector3(Vector3.Normalize(light.lightPos - intersP));
 
@@ -146,25 +150,5 @@ namespace Template
             return true;
         }
 
-
-        public void DrawPrimsDebug()
-        {
-            foreach (Sphere sphere in scene.sphereList)
-            {
-                GL.Begin(PrimitiveType.TriangleFan);
-                GL.Color3(50f, 50f, 50f);
-                for (int theta = 0; theta < 360; theta++)
-                {
-                    //theta = (int)(theta * Math.PI)/180;                   
-                    Vector2 circleOr = new Vector2(sphere.spherePos.X + 512, sphere.spherePos.Y);
-                    circleEq = circleOr + sphere.rad * new Vector2((float)Math.Cos(theta), (float)Math.Sin(theta));
-                    GL.Vertex2(Math.Cos(theta) * 10, Math.Sin(theta) * 10);
-                }//draw circle or line at y=0
-                GL.End();
-                //GL.Color3(1.0f, 1.0f, 0f);
-                //GL.Begin(PrimitiveType.LineLoop);
-                //GL.Vertex2((double)circleEq.X, (double)circleEq.Y);
-            }
-        }
     }
 }
