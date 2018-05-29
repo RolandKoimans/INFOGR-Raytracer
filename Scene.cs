@@ -32,8 +32,9 @@ namespace Template
             Sphere sphere1 = new Sphere(4, -5, 0, 20)
             {
                 material = new Material(new Vector3(1, 0, 0))
-
+                
             };
+            sphere1.material.IsReflective = false;
             primitives.Add(sphere1);
             sphereList.Add(sphere1);
 
@@ -41,6 +42,7 @@ namespace Template
             {
                 material = new Material(new Vector3(1, 0, 1))
             };
+            sphere2.material.IsReflective = true;
             primitives.Add(sphere2);
             sphereList.Add(sphere2);
 

@@ -11,6 +11,7 @@ namespace Template
     class Material
     {
         public Vector3 color;
+        public bool IsReflective = false; 
 
         public Material(Vector3 color)
         {

@@ -25,10 +25,11 @@ namespace Template
         public Vector3 Render(float u, float v)
         {
             Ray ray = camera.getRay(u, v);
-            return Trace(ray);
+            int cap = 0;
+            return Trace(ray, cap);
         }
 
-        public Vector3 Trace(Ray ray)
+        public Vector3 Trace(Ray ray, int cap)
         {
             float maxdistance = float.PositiveInfinity;
             Intersection closestIntersect = null;
@@ -76,7 +77,11 @@ namespace Template
                                 currentcolor = new Vector3(1f, 1f, 1f);
                             }
                         }
-
+                        
+                        if (cap < 2){
+                            cap++;
+                            currentcolor = AdjustReflection(currentcolor, cap, closestIntersect);
+                        }
                         currentcolor.X = Math.Min(currentcolor.X * light.DistAtt(shadowdist).X, 1f);
                         currentcolor.Y = Math.Min(currentcolor.Y * light.DistAtt(shadowdist).Y, 1f);
                         currentcolor.Z = Math.Min(currentcolor.Z * light.DistAtt(shadowdist).Z, 1f);
@@ -89,11 +94,27 @@ namespace Template
             return Vector3.Zero;
         }
 
-        public Ray GetSecondaryRay(Intersection intersection)
+        public Vector3 AdjustReflection(Vector3 currentcolor, int currentdepth, Intersection intersect)
+        {
+
+            if (intersect.currentobject.material.IsReflective == true)
+            {
+                Ray secondaryRay = getSecondaryRay(intersect);
+                secondaryRay.Direction.Z *= -1;
+                secondaryRay.Direction.Y *= -1;
+                secondaryRay.Direction.X *= -1;
+                Vector3 newcolor = Trace(secondaryRay, currentdepth);
+                currentcolor = (currentcolor + newcolor) / 2;
+
+            }
+            return currentcolor;
+        }
+
+        public Ray getSecondaryRay(Intersection intersection)
         {
             Ray secRay;
             Vector3 secOr = new Vector3(intersection.ray.Origin + intersection.distance * intersection.ray.Direction);
-            Vector3 secDir = new Vector3(2 * intersection.normal * (intersection.normal * intersection.ray.Direction) - intersection.ray.Direction);
+            Vector3 secDir = new Vector3(2 * intersection.normal * Vector3.Dot(intersection.normal, intersection.ray.Direction) - intersection.ray.Direction);
 
             return secRay = new Ray(secOr, secDir);
         }
