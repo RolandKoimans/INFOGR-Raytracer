@@ -187,7 +187,9 @@ namespace Template
 
                 screen.Line((int)secOx + 750, (int)secOz * -1 + 400, (int)secTx + 750, (int)secTz * -1 + 400, 0x00ffff);
             }
-
+            tracer.raylist.Clear();
+            tracer.shadowlist.Clear();
+            tracer.secondarylist.Clear();
 
 
             //screen.Line((int)originx + 750, (int)originz * -1 + 400, (int)targetx + 750, (int)targetz * -1 + 400, 0xffff00);
