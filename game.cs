@@ -114,54 +114,8 @@ namespace Template
 
                 screen.Line((int)primOx + 750, (int)primOz * -1 + 400, (int)primTx + 750, (int)primTz * -1 + 400, 0xffff00);
             }
-
-
-            // should have drawn the shadow rays, does not do so correctly. 
-            for (int i = 0; i < tracer.shadowlist.Count; i++)
-            {
-                float shadowdist;
-
-                float shadOx = tracer.shadowlist[i].Origin.X;
-                float shadOy = tracer.shadowlist[i].Origin.Y;
-                float shadOz = tracer.shadowlist[i].Origin.Z;
-
-                foreach (Light light in tracer.scene.lightList)
-                {
-                    shadowdist = (float)Math.Sqrt((light.lightPos.X - shadOx) * (light.lightPos.X - shadOx) + (light.lightPos.Y - shadOy) * (light.lightPos.Y - shadOy) + (light.lightPos.Z - shadOz) * (light.lightPos.Z - shadOz));
-                    float shadTx = (shadOx + shadowdist * tracer.shadowlist[i].Direction.X) * 5;
-                    float shadTz = (shadOz + shadowdist * tracer.shadowlist[i].Direction.Z) * 5;
-
-                    screen.Line((int)shadOx + 750, (int)shadOz * -1 + 400, (int)shadTx + 750, (int)shadTz * -1 + 400, 0xff8000);
-                }
-            }
-
-            // should have drawn the secondary rays, does not do so correctly.
-            for (int i = 0; i < tracer.secondarylist.Count; i++)
-            { 
-                float r = 50;
-                foreach (Primitive prim in tracer.scene.sphereList)
-                {
-                    Intersection intersect = prim.Intersect(tracer.secondarylist[i]);
-                    if (intersect != null)
-                    {
-                        if (intersect.distance < r)
-                        {
-                            r = intersect.distance;
-                        }
-                    }
-                }
-
-                float secOx = tracer.secondarylist[i].Origin.X;
-                float secOz = tracer.secondarylist[i].Origin.Z;
-
-                float secTx = (secOx + r * tracer.secondarylist[i].Direction.X) * 5;
-                float secTz = (secOz + r * tracer.secondarylist[i].Direction.Z) * 5;
-
-                screen.Line((int)secOx + 750, (int)secOz * -1 + 400, (int)secTx + 750, (int)secTz * -1 + 400, 0x00ffff);
-            }
             tracer.raylist.Clear();
-            tracer.shadowlist.Clear();
-            tracer.secondarylist.Clear();
+            
 
             //Draws a seperation line.
             screen.Line(512, 0, 512, 512, 0xff0000);

@@ -14,9 +14,7 @@ namespace Template
         public Camera camera = new Camera();
         public Scene scene = new Scene();
         public List<Ray> raylist = new List<Ray>();
-        public List<Ray> shadowlist = new List<Ray>();
-        public List<Ray> secondarylist = new List<Ray>();
-
+       
         public float epsilon, shadowdist;
 
         public Raytracer()
@@ -83,7 +81,7 @@ namespace Template
                             }
                         }
                         //Checks for reflection, adds a cap for max recursion
-                        if (cap < 2)
+                        if (cap < 3)
                         {
                             cap++;
                             currentcolor = AdjustReflection(currentcolor, cap, closestIntersect);
@@ -133,11 +131,7 @@ namespace Template
             Vector3 secOr = new Vector3(intersection.ray.Origin + intersection.distance * intersection.ray.Direction);
             Vector3 secDir = new Vector3(2 * intersection.normal * Vector3.Dot(intersection.normal, intersection.ray.Direction) - intersection.ray.Direction);
             secRay = new Ray(secOr, secDir);
-            if (raylist.Contains(intersection.ray))
-            {
-                secondarylist.Add(secRay);
-            }
-
+          
             return secRay;
         }
 
@@ -165,11 +159,6 @@ namespace Template
                     return false;
                 }
 
-                
-                if (raylist.Contains(intersection.ray))
-                {
-                    shadowlist.Add(shadowRay);
-                }
             }          
             return true;
         }
