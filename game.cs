@@ -84,7 +84,11 @@ namespace Template
             //Draws the camera in the debug view
             screen.Plot((int)tracer.camera.cameraPos.X + 750, (int)tracer.camera.cameraPos.Z * -1 + 400, 0xff0000);
 
-            screen.Plot((int)tracer.scene.lightList[0].lightPos.X + 750, (int)tracer.scene.lightList[0].lightPos.Z * -1 + 400, 0xcc66ff);
+            foreach (Light light in tracer.scene.lightList)
+            {
+                screen.Plot((int)light.lightPos.X + 750, (int)light.lightPos.Z * -1 + 400, 0xcc66ff);
+            }
+            
 
             //Draws the primary rays in the debug view
             for (float j = 0; j < 1f; j += 0.1f)
@@ -101,9 +105,7 @@ namespace Template
                         {
                             t = intersect.distance;
                         }
-
                     }
-
                 }
 
                 float originx = primaryray.Origin.X;
@@ -113,12 +115,10 @@ namespace Template
                 float targetz = (primaryray.Origin.Z + t * primaryray.Direction.Z) * 5;
 
                 screen.Line((int)originx + 750, (int)originz * -1 + 400, (int)targetx + 750, (int)targetz * -1 + 400, 0xffff00);
-
-
-
             }
 
-
+            //Draws the secondary rays in the debug view
+            
             //Draws a seperation line.
             screen.Line(512, 0, 512, 512, 0xff0000);
 

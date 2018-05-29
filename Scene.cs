@@ -19,12 +19,12 @@ namespace Template
         public Scene()
         {
             Vector3 mainLPos = new Vector3(0, -10, -1);
-            Vector3 mainLInt = new Vector3(2000, 2000, 1800);
+            Vector3 mainLInt = new Vector3(3, 3, 1);
             Light mainLight = new Light(mainLPos, mainLInt);
             lightList.Add(mainLight);
 
-            Vector3 light2Pos = new Vector3(5, -10, 5);
-            Vector3 light2Int = new Vector3(5000, 5000, 1);
+            Vector3 light2Pos = new Vector3(0, -10, 20);
+            Vector3 light2Int = new Vector3(2, 2, 2);
             Light light2 = new Light(light2Pos, light2Int);
             lightList.Add(light2);
             

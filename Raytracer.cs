@@ -14,12 +14,12 @@ namespace Template
         public Camera camera = new Camera();
         public Scene scene = new Scene();
 
-        public Vector2 circleEq;
+        //public Vector2 circleEq;
         public float epsilon, shadowdist;
 
         public Raytracer()
         {
-
+            
         }
 
         public Vector3 Render(float u, float v)
@@ -57,7 +57,7 @@ namespace Template
 
                 foreach (Light light in scene.lightList)
                 {
-
+                    
                     if (!IsVisible(closestIntersect, light))
                     {
                         currentcolor = currentcolor * 0;
@@ -83,14 +83,18 @@ namespace Template
                             cap++;
                             currentcolor = AdjustReflection(currentcolor, cap, closestIntersect);
                         }
+
+                        Vector3 intersP = new Vector3(closestIntersect.ray.Origin + closestIntersect.distance * closestIntersect.ray.Direction);
+                        shadowdist = (float)Math.Sqrt((light.lightPos.X - intersP.X) * (light.lightPos.X - intersP.X) + (light.lightPos.Y - intersP.Y) * (light.lightPos.Y - intersP.Y) + (light.lightPos.Z - intersP.Z) * (light.lightPos.Z - intersP.Z));
+
                         currentcolor.X = Math.Min(currentcolor.X * light.DistAtt(shadowdist).X, 1f);
                         currentcolor.Y = Math.Min(currentcolor.Y * light.DistAtt(shadowdist).Y, 1f);
                         currentcolor.Z = Math.Min(currentcolor.Z * light.DistAtt(shadowdist).Z, 1f);
                     }
-
-
-                    return currentcolor;
+                    
+                              
                 }
+                return currentcolor;
             }
 
             // Return black when there is no intersection
@@ -107,6 +111,7 @@ namespace Template
                 secondaryRay.Direction.Y *= -1;
                 secondaryRay.Direction.X *= -1;
                 Vector3 newcolor = Trace(secondaryRay, currentdepth);
+
                 currentcolor = (currentcolor + newcolor) / 2;
 
             }
@@ -146,7 +151,7 @@ namespace Template
                     return false;
                 }
             }
-            shadowdist = (float)Math.Sqrt((light.lightPos.X - intersP.X) * (light.lightPos.X - intersP.X) + (light.lightPos.Y - intersP.Y) * (light.lightPos.Y - intersP.Y) + (light.lightPos.Z - intersP.Z) * (light.lightPos.Z - intersP.Z));
+           // shadowdist = (float)Math.Sqrt((light.lightPos.X - intersP.X) * (light.lightPos.X - intersP.X) + (light.lightPos.Y - intersP.Y) * (light.lightPos.Y - intersP.Y) + (light.lightPos.Z - intersP.Z) * (light.lightPos.Z - intersP.Z));
             return true;
         }
 
